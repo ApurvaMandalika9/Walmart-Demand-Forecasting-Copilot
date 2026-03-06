@@ -34,10 +34,22 @@ if st.button("Ask Copilot"):
             st.subheader("Forecast Plot")
 
             df = pd.DataFrame(data["forecast"])
-            # expecting columns: date, yhat
+            # expecting columns: date, predicted_sales
             if "date" in df.columns and "predicted_sales" in df.columns:
                 df["date"] = pd.to_datetime(df["date"])
                 df = df.sort_values("date").set_index("date")
+                # --- Display forecast numbers ---
+                st.subheader("Forecast Values")
+
+                display_df = df.rename(columns={
+                    "date": "Date",
+                    "predicted_sales": "Predicted Sales (in $)"
+                })
+
+                st.table(display_df)
+
+                # --- Forecast chart ---
+                st.subheader("Forecast Trend")
                 st.line_chart(df["predicted_sales"])
             else:
                 st.info("Forecast data returned but missing expected keys: 'date' and 'predicted_sales'.")
