@@ -99,7 +99,7 @@ The project uses the Walmart Weekly Sales dataset containing:
 - CPI
 - Unemployment rate
 
-The dataset can be found ![here](https://www.kaggle.com/datasets/mikhail1681/walmart-sales)
+The dataset can be found [here](https://www.kaggle.com/datasets/mikhail1681/walmart-sales)
 
 ---
 
