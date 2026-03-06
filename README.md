@@ -43,7 +43,7 @@ Response:
 
 # Architecture
 
-User Query -> Streamlit UI -> FastAPI Backend -> Agent Router -> Tools [Forecast Tool (XGBoost model) or KPI Tool (sales analytics)]
+![Architecture](screenshots/Walmart-Forecasting-Arch.png)
 
 ---
 
