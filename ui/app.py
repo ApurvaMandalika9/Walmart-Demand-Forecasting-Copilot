@@ -4,8 +4,8 @@ import pandas as pd
 
 API_URL = "http://127.0.0.1:8000"
 
-st.set_page_config(page_title="Walmart Sales Copilot", layout="centered")
-st.title("Walmart Sales Forecasting Copilot")
+st.set_page_config(page_title="Walmart Sales", layout="centered")
+st.title("Walmart Demand Forecasting Copilot")
 
 st.write("Type a question like: **forecast next 6 weeks for store 1** or **kpi for store 1**")
 

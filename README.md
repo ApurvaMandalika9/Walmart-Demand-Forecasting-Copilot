@@ -35,25 +35,15 @@ Response:
 
 # UI Preview
 
-![Forecast UI](screenshots/ui_forecast.png)
-![KPI UI](screenshots/ui_kpi.png)
+![Forecast UI](screenshots/Forecast.png)
+![KPI UI](screenshots/KPI.png)
 
 
 ---
 
 # Architecture
 
-User Query
-    ↓
-Streamlit UI
-    ↓
-FastAPI Backend
-    ↓
-Agent Router
-    ↓
-Tools
-   ├─ Forecast Tool (XGBoost model)
-   └─ KPI Tool (sales analytics)
+User Query -> Streamlit UI -> FastAPI Backend -> Agent Router -> Tools [Forecast Tool (XGBoost model) or KPI Tool (sales analytics)]
 
 ---
 
@@ -98,33 +88,6 @@ The Streamlit interface allows users to:
 
 ---
 
-# Project Structure 
-
-walmart-demand-forecasting-copilot
-│
-├── app
-│   ├── main.py
-│   ├── forecasting.py
-│   ├── features.py
-│   ├── metrics.py
-│   ├── tools.py
-│   └── agent.py
-│
-├── ui
-│   └── app.py
-│
-├── data
-│   └── walmart_sales.csv
-|-- scripts
-|   |__ explore.py
-│
-├── requirements.txt
-├── .gitignore
-└── README.md
-
-
----
-
 # Dataset
 
 The project uses the Walmart Weekly Sales dataset containing:
@@ -136,7 +99,7 @@ The project uses the Walmart Weekly Sales dataset containing:
 - CPI
 - Unemployment rate
 
-The dataset can be found [here][https://www.kaggle.com/datasets/mikhail1681/walmart-sales]
+The dataset can be found ![here](https://www.kaggle.com/datasets/mikhail1681/walmart-sales)
 
 ---
 
