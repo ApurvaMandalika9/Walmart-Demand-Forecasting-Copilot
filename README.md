@@ -43,7 +43,7 @@ Response:
 
 # Architecture
 
-![Architecture](screenshots/Walmart-Forecasting-Arch.png)
+![Architecture](screenshots/Walmart-Forecasting_Arch.png)
 
 ---
 
