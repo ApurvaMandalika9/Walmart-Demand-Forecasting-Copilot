@@ -116,12 +116,13 @@ Features include:
 
 ---
 
-# Future Improvements
-1. Add historical vs predicted sales visualization
-2. Add confidence intervals for forecasts
-3. Support multi-store forecasting
-4. Integrate LLM-based explanations
-5. Deploy API to cloud platforms (AWS / GCP)
+# Project Versions
+
+### Phase-1 branch
+Rule-based query routing for forecasting and KPI tools.
+
+### Phase-2 branch
+LLM-powered routing using Gemini API to dynamically select tools and extract parameters.
 
 
 
