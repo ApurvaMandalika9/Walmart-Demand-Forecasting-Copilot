@@ -1,24 +1,31 @@
-import re
+from app.llm_client import call_llm
 
 
-def parse_store_id(text: str, default: int = 1) -> int:
-    m = re.search(r"store\s*(\d+)", text.lower())
-    return int(m.group(1)) if m else default
+def route_query(question: str) -> dict:
+    try:
+        result = call_llm(question)
 
+        tool = result.get("tool", "kpi_tool")
+        store_id = int(result.get("store_id", 1))
+        horizon = int(result.get("horizon", 6))
 
-def parse_horizon_weeks(text: str, default: int = 6) -> int:
-    m = re.search(r"next\s*(\d+)\s*weeks?", text.lower())
-    return int(m.group(1)) if m else default
+        if tool not in ["forecast_tool", "kpi_tool"]:
+            tool = "kpi_tool"
 
+        if store_id < 1:
+            store_id = 1
 
-def route_query(text: str) -> str:
-    t = text.lower()
-    # Forecast intents
-    if "forecast" in t or "predict" in t:
-        return "forecast"
+        if horizon < 1:
+            horizon = 6
 
-    # KPI intents
-    if "kpi" in t or "average" in t or "avg" in t or "mean" in t or "summary" in t:
-        return "kpi"
-
-    return "unknown"
+        return {
+            "tool": tool,
+            "store_id": store_id,
+            "horizon": horizon
+        }
+    except Exception:
+        return{
+            "tool": "kpi_tool",
+            "store_id": 1,
+            "horizon": 6
+        }

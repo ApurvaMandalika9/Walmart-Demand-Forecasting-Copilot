@@ -61,8 +61,8 @@ if st.button("Ask Copilot"):
             kpis = data["kpis"]
 
             c1, c2, c3 = st.columns(3)
-            c1.metric("Avg (last 8 weeks)", f"{kpis.get('avg_last_8_weeks', 0):,.0f}")
-            c2.metric("Max (last 8 weeks)", f"{kpis.get('max_last_8_weeks', 0):,.0f}")
+            c1.metric("Avg", f"{kpis.get('avg', 0):,.0f}")
+            c2.metric("Max", f"{kpis.get('max', 0):,.0f}")
             c3.metric("Last week sales", f"{kpis.get('last_week_sales', 0):,.0f}")
 
             # Optional: bar chart of these KPIs

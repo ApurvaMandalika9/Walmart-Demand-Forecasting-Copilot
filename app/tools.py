@@ -18,25 +18,26 @@ def forecast_tool(store_id: int, horizon: int = 6):
     }
 
 
-def kpi_tool(store_id: int):
+def kpi_tool(store_id: int, horizon: int = 6):
     df = load_data()
     df = create_features(df)
     store_df = df[df["Store"] == store_id].sort_values("Date")
 
-    last_8 = store_df.tail(8)
+    last_n = store_df.tail(horizon)
 
-    if len(last_8) == 0:
+    if len(last_n) == 0:
         return {"store_id": store_id, "kpis": {}, "warning": "No data found for that store_id."}
     
-    avg_sales = float(last_8["Weekly_Sales"].mean())
-    max_sales = float(last_8["Weekly_Sales"].max())
-    last_week = float(last_8["Weekly_Sales"].iloc[-1])
+    avg_sales = float(last_n["Weekly_Sales"].mean())
+    max_sales = float(last_n["Weekly_Sales"].max())
+    last_week = float(last_n["Weekly_Sales"].iloc[-1])
 
     return {
         "store_id": store_id,
+        "horizon_weeks": horizon,
         "kpis": {
-            "avg_last_8_weeks": avg_sales,
-            "max_last_8_weeks": max_sales,
+            "avg": avg_sales,
+            "max": max_sales,
             "last_week_sales": last_week,
         }
     }

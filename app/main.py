@@ -1,8 +1,16 @@
 from fastapi import FastAPI
-from app.agent import route_query, parse_store_id, parse_horizon_weeks
+from fastapi.middleware.cors import CORSMiddleware
+from app.agent import route_query
 from app.tools import forecast_tool, kpi_tool
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def home():
@@ -12,26 +20,32 @@ def home():
 def query(question: str):
     route = route_query(question)
 
-    if route == "forecast":
-        store_id = parse_store_id(question, default=1)
-        horizon = parse_horizon_weeks(question, default=6)
+    tool = route["tool"]
+    store_id = route["store_id"]
+    horizon = route["horizon"]
+
+    if tool == "forecast_tool":
         result = forecast_tool(store_id=store_id, horizon=horizon)
         return {
             "answer": f"Forecast for store {store_id} for next {horizon} weeks",
             "tool_trace": [f"forecast_tool(store_id={store_id}, horizon={horizon})"],
+            "router": "gemini",
             **result
         }
 
-    if route == "kpi":
-        store_id = parse_store_id(question, default=1)
-        result = kpi_tool(store_id=store_id)
+    if tool == "kpi_tool":
+        result = kpi_tool(store_id=store_id, horizon=horizon)
         return {
-            "answer": f"KPIs for store {store_id}",
-            "tool_trace": [f"kpi_tool(store_id={store_id})"],
+            "answer": f"KPIs for store {store_id} for next {horizon} weeks",
+            "tool_trace": [f"kpi_tool(store_id={store_id}, horizon={horizon})"],
+            "router": "gemini",
             **result
         }
 
-    return {"answer": "Try: 'forecast next 6 weeks for store 1' or 'kpi for store 1'."}
+    return {
+        "answer": "I could not determine the correct tool for this query.",
+        "router": "gemini"
+    }
 
 @app.get("/forecast")
 def forecast(store_id: int = 1, horizon: int = 6):
