@@ -35,16 +35,28 @@ Response:
 
 # UI Preview
 
+### Phase - 1:
+
 ![Forecast UI](screenshots/Forecast.png)
 ![KPI UI](screenshots/KPI.png)
 
+### Phase - 2:
+
+![Forecast UI](screenshots/Forecast-2.png)
+![KPI UI](screenshots/KPI-2.png)
 
 ---
 
 # Architecture
 
+### Phase - 1:
+
 ![Architecture](screenshots/Walmart-Forecasting_Arch.png)
 
+
+### Phase - 2:
+
+![Architecture](screenshots/Architecture.png)
 ---
 
 # Features
